@@ -1,0 +1,11 @@
+{
+  "name": "ANTRIIN",
+  "description": "Digital queue management platform for MSMEs with real-time tracking, AI assistance, and business analytics.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

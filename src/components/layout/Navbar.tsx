@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Users, ChevronRight, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "../../lib/utils";
@@ -7,6 +7,7 @@ import { cn } from "../../lib/utils";
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -16,8 +17,21 @@ export function Navbar() {
 
   const navLinks = [
     { name: "Beranda", href: "/" },
+    { name: "Panduan", href: "/#panduan" },
     { name: "Harga", href: "/pricing" },
   ];
+
+  const isHome = location.pathname === "/";
+  const isDarkNav = isHome && !scrolled;
+
+  const logoColorClass = isDarkNav ? "text-white" : "text-slate-900";
+  const linkColorClass = isDarkNav 
+    ? "text-slate-300 hover:text-white" 
+    : "text-slate-500 hover:text-brand-600";
+  const loginColorClass = isDarkNav 
+    ? "text-slate-300 hover:text-white" 
+    : "text-slate-500 hover:text-slate-900";
+  const menuBtnColorClass = isDarkNav ? "text-white" : "text-slate-900";
 
   return (
     <nav className={cn(
@@ -29,7 +43,7 @@ export function Navbar() {
           <div className="w-9 h-9 bg-brand-600 rounded-xl flex items-center justify-center transform group-hover:rotate-12 transition-all shadow-lg shadow-brand-500/20">
             <Users className="text-white w-5 h-5" />
           </div>
-          <span className="font-display text-2xl font-bold tracking-tight text-slate-900 uppercase">
+          <span className={cn("font-display text-2xl font-bold tracking-tight uppercase transition-colors duration-350", logoColorClass)}>
             Antri<span className="text-brand-600">in</span>
           </span>
         </Link>
@@ -40,7 +54,7 @@ export function Navbar() {
             <Link 
               key={link.name}
               to={link.href} 
-              className="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-brand-600 transition-colors"
+              className={cn("text-xs font-bold uppercase tracking-widest transition-colors duration-350", linkColorClass)}
             >
               {link.name}
             </Link>
@@ -48,7 +62,7 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-6">
-          <Link to="/login" className="hidden sm:block text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors">
+          <Link to="/login" className={cn("hidden sm:block text-xs font-bold uppercase tracking-widest transition-colors duration-350", loginColorClass)}>
             Masuk
           </Link>
           <Link to="/register">
@@ -62,7 +76,7 @@ export function Navbar() {
           </Link>
           
           <button 
-            className="md:hidden text-slate-900"
+            className={cn("md:hidden transition-colors duration-350", menuBtnColorClass)}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X /> : <Menu />}

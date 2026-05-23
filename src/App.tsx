@@ -10,7 +10,13 @@ import { Contact } from "./pages/Contact";
 import { Terms } from "./pages/Terms";
 import { ScrollToTop } from "./pages/ScrollToTop";
 import { AdminDashboard } from "./pages/dashboard/Admin";
+import { AdminQueues } from "./pages/dashboard/AdminQueues";
+import { AdminServices } from "./pages/dashboard/AdminServices";
+import { AdminStats } from "./pages/dashboard/AdminStats";
+import { AdminSettings } from "./pages/dashboard/AdminSettings";
 import { CustomerDashboard } from "./pages/dashboard/Customer";
+import { CustomerQueue } from "./pages/dashboard/CustomerQueue";
+import { CustomerServices } from "./pages/dashboard/CustomerServices";
 
 export default function App() {
   return (
@@ -31,16 +37,16 @@ export default function App() {
         {/* Dashboard Routes */}
         <Route path="dashboard/admin" element={<DashboardLayout role="admin" />}>
           <Route index element={<AdminDashboard />} />
-          <Route path="queue" element={<AdminDashboard />} />
-          <Route path="services" element={<AdminDashboard />} />
-          <Route path="stats" element={<AdminDashboard />} />
-          <Route path="settings" element={<AdminDashboard />} />
+          <Route path="queue" element={<AdminQueues />} />
+          <Route path="services" element={<AdminServices />} />
+          <Route path="stats" element={<AdminStats />} />
+          <Route path="settings" element={<AdminSettings />} />
         </Route>
 
         <Route path="dashboard/customer" element={<DashboardLayout role="customer" />}>
           <Route index element={<CustomerDashboard />} />
-          <Route path="queue" element={<CustomerDashboard />} />
-          <Route path="search" element={<CustomerDashboard />} />
+          <Route path="queue" element={<CustomerQueue />} />
+          <Route path="search" element={<CustomerServices />} />
         </Route>
         
         <Route path="*" element={<Navigate to="/" replace />} />

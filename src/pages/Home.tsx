@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronRight, Zap, Target, BarChart3, Clock, CheckCircle2, ShieldCheck, Camera, User, Building, Sparkles, Smartphone, ArrowRight, BookOpen, Quote, Sparkle } from "lucide-react";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const features = [
   {
@@ -23,6 +23,18 @@ const features = [
 
 export function Home() {
   const [showcaseTab, setShowcaseTab] = useState<"fitur" | "aktivitas" | "cerita" | "pengalaman" | "layanan">("fitur");
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 150);
+      }
+    }
+  }, [location]);
 
   const showcaseData = {
     fitur: {
@@ -69,7 +81,7 @@ export function Home() {
   return (
     <div className="overflow-hidden bg-transparent">
       {/* Cinematic Hero */}
-      <section className="relative min-h-[90vh] flex items-center pt-20 pb-32 overflow-hidden">
+      <section className="relative min-h-[90vh] bg-slate-950 flex items-center pt-20 pb-32 overflow-hidden">
         {/* Editorial Background Image */}
         <div className="absolute inset-0 -z-10">
           <img 
@@ -90,7 +102,7 @@ export function Home() {
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-[10px] font-bold tracking-[0.2em] uppercase mb-10 backdrop-blur-md">
               <Zap className="w-3.5 h-3.5 fill-brand-400" /> Baru: Asisten AI Terintegrasi
             </div>
-            <h1 className="font-display text-6xl md:text-8xl font-bold text-white leading-[1] mb-10 tracking-tight">
+            <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.1] mb-10 tracking-tight">
               Manajemen Antrian <br />
               <span className="text-brand-500">Digital</span> <br />
               Jadi Lebih Mudah.
@@ -99,14 +111,14 @@ export function Home() {
               Transformasi bisnis Anda dengan platform antrian modern. Pelacakan real-time, bantuan AI, dan pengalaman pelanggan yang mulus untuk UMKM.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-6">
-              <Link to="/register" className="w-full sm:w-auto">
-                <motion.button
+              <Link to="/register" className="w-full sm:w-auto block">
+                <motion.span
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-brand-600 text-white px-10 py-5 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-brand-700 transition-all shadow-2xl shadow-brand-600/40 w-full"
+                  className="bg-brand-600 text-white px-10 py-5 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-brand-700 transition-all shadow-2xl shadow-brand-600/40 w-full block text-center cursor-pointer"
                 >
                   Mulai Coba Gratis
-                </motion.button>
+                </motion.span>
               </Link>
               <Link to="/login" className="w-full sm:w-auto text-white group flex items-center gap-3 text-sm font-bold uppercase tracking-widest hover:text-brand-400 transition-colors">
                 Uji Coba Demo Langsung <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -175,7 +187,7 @@ export function Home() {
       </section>
 
       {/* Onboarding Guide: Easy to Understand & Use */}
-      <section className="py-28 bg-slate-900 text-white rounded-[4rem] mx-6 relative overflow-hidden shadow-2xl">
+      <section className="py-28 bg-slate-900 text-white rounded-[4rem] mx-6 relative overflow-hidden shadow-2xl" id="panduan">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-600/10 via-transparent to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           
@@ -231,10 +243,11 @@ export function Home() {
               </div>
 
               <div className="pt-8">
-                <Link to="/login">
-                  <button className="w-full flex items-center justify-center gap-2 py-4 px-6 bg-white text-slate-900 hover:bg-brand-50 rounded-2xl text-xs font-bold uppercase tracking-widest transition-all shadow-md group">
-                    Ambil Tiket Sebagai Pelanggan <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
+                <Link 
+                  to="/login"
+                  className="w-full flex items-center justify-center gap-2 py-4 px-6 bg-white text-slate-900 hover:bg-brand-50 rounded-2xl text-xs font-bold uppercase tracking-widest transition-all shadow-md group text-center cursor-pointer font-bold"
+                >
+                  Ambil Tiket Sebagai Pelanggan <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>
@@ -277,10 +290,11 @@ export function Home() {
               </div>
 
               <div className="pt-8">
-                <Link to="/register">
-                  <button className="w-full flex items-center justify-center gap-2 py-4 px-6 bg-slate-800 hover:bg-slate-700 text-white rounded-2xl text-xs font-bold uppercase tracking-widest transition-all border border-white/10 group">
-                    Daftar Sebagai Pemilik Usaha <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
+                <Link 
+                  to="/register"
+                  className="w-full flex items-center justify-center gap-2 py-4 px-6 bg-slate-800 hover:bg-slate-700 text-white rounded-2xl text-xs font-bold uppercase tracking-widest transition-all border border-white/10 group text-center cursor-pointer font-bold"
+                >
+                  Daftar Sebagai Pemilik Usaha <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>
@@ -418,10 +432,11 @@ export function Home() {
                       <p className="text-sm font-display font-medium text-slate-300">Statistik Keandalan:</p>
                       <h4 className="text-lg font-bold text-white uppercase tracking-tight">{showcaseData[showcaseTab].stats}</h4>
                     </div>
-                    <Link to="/login">
-                      <button className="py-3 px-6 bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold rounded-2xl text-[10px] uppercase tracking-widest transition-all shadow-lg shrink-0">
-                        Coba Fitur Sekarang
-                      </button>
+                    <Link 
+                      to="/login"
+                      className="py-3 px-6 bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold rounded-2xl text-[10px] uppercase tracking-widest transition-all shadow-lg shrink-0 text-center cursor-pointer block"
+                    >
+                      Coba Fitur Sekarang
                     </Link>
                   </div>
                 </div>
@@ -470,10 +485,11 @@ export function Home() {
               <p className="text-slate-400 text-xl max-w-2xl mx-auto mb-16 font-medium">
                 Bergabunglah dengan ribuan bisnis yang telah mentransformasi pengalaman pelanggan mereka bersama Antriin.
               </p>
-              <Link to="/register">
-                <button className="bg-white text-slate-900 px-12 py-6 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-brand-50 transition-all shadow-xl">
-                  Mulai Sekarang Gratis
-                </button>
+              <Link 
+                to="/register"
+                className="bg-white text-slate-900 px-12 py-6 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-brand-50 transition-all shadow-xl inline-block text-center cursor-pointer"
+              >
+                Mulai Sekarang Gratis
               </Link>
               <div className="mt-12 flex flex-wrap items-center justify-center gap-10 text-[10px] text-slate-500 font-bold uppercase tracking-[0.2em]">
                 <div className="flex items-center gap-3"><CheckCircle2 className="w-4 h-4 text-brand-500" /> Tanpa Kartu Kredit</div>

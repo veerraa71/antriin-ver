@@ -45,6 +45,7 @@ async function initMySQL() {
       user,
       password,
       port,
+      connectTimeout: 2000,
     });
     
     await adminConnection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
@@ -60,6 +61,7 @@ async function initMySQL() {
       waitForConnections: true,
       connectionLimit: 10,
       queueLimit: 0,
+      connectTimeout: 2000,
     });
 
     // 3. Setup tables
@@ -86,6 +88,16 @@ async function initMySQL() {
 
     await pool.query(createUsersTable);
     await pool.query(createQueuesTable);
+
+    // Auto-seed default admin account into MySQL if table is empty
+    const [rows]: any = await pool.query("SELECT COUNT(*) as count FROM users");
+    if (rows && rows[0] && rows[0].count === 0) {
+      await pool.query(
+        "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)",
+        ["Admin ANTRIIN", "admin@antriin.com", "password123", "admin"]
+      );
+      console.log("ℹ️ Seeded default admin user 'admin@antriin.com' into MySQL database.");
+    }
 
     console.log("✅ Successfully connected to MySQL & verified tables structure.");
     isUsingMySQL = true;

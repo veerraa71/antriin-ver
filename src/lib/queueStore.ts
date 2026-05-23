@@ -21,7 +21,12 @@ const DEFAULT_QUEUES: QueueItem[] = [
 // Sinkronisasi background dari server database ke localStorage secara asinkron
 export async function syncQueuesWithServer() {
   try {
-    const res = await fetch("/api/queues");
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 1200); // 1.2s timeout fail-fast for background sync
+
+    const res = await fetch("/api/queues", { signal: controller.signal });
+    clearTimeout(timeoutId);
+
     if (res.ok) {
       const data = await res.json();
       if (Array.isArray(data)) {
@@ -29,8 +34,8 @@ export async function syncQueuesWithServer() {
         window.dispatchEvent(new Event("queue-updated"));
       }
     }
-  } catch (err) {
-    console.warn("Server sync currently unavailable, using offline local storage fallback.", err);
+  } catch (err: any) {
+    console.warn("Server sync currently unavailable, using offline local storage fallback.", err.message);
   }
 }
 
@@ -52,11 +57,18 @@ export function saveQueues(queues: QueueItem[]) {
   window.dispatchEvent(new Event("queue-updated"));
 
   // Kirim data secara asinkron ke server database file untuk persistensi permanen
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 1500); // 1.5s timeout for saves
+
   fetch("/api/queues", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(queues),
-  }).catch(err => {
+    signal: controller.signal
+  })
+  .then(() => clearTimeout(timeoutId))
+  .catch(err => {
+    clearTimeout(timeoutId);
     console.error("Failed to commit queue storage to server db.json:", err);
   });
 }

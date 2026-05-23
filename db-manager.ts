@@ -27,14 +27,15 @@ let isUsingMySQL = false;
 
 // Initialize connection safely
 async function initMySQL() {
+  const useMySQL = process.env.USE_MYSQL === "true";
   const host = process.env.DB_HOST;
   const user = process.env.DB_USER;
   const password = process.env.DB_PASSWORD;
   const database = process.env.DB_NAME;
   const port = parseInt(process.env.DB_PORT || "3306", 10);
 
-  if (!host || !user || !database) {
-    console.log("ℹ️ MySQL credentials not fully configured in .env. Falling back to local JSON Database.");
+  if (!useMySQL || !host || !user || !database) {
+    console.log("ℹ️ MySQL is disabled or credentials not fully configured in .env (USE_MYSQL=true). Using flat, zero-dependency local JSON file database.");
     return null;
   }
 

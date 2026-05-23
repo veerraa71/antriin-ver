@@ -1,14 +1,17 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { Chatbot } from "../Chatbot";
 import { motion, AnimatePresence } from "motion/react";
 
 export function Layout() {
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
   return (
     <div className="min-h-screen flex flex-col font-sans">
       <Navbar />
-      <main className="flex-grow pt-16">
+      <main className={`flex-grow ${isHome ? "" : "pt-16"}`}>
         <AnimatePresence mode="wait">
           <motion.div
             initial={{ opacity: 0, y: 10 }}

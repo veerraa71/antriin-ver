@@ -81,7 +81,7 @@ export function Home() {
   return (
     <div className="overflow-hidden bg-transparent">
       {/* Cinematic Hero */}
-      <section className="relative min-h-[90vh] bg-slate-950 flex items-center pt-20 pb-32 overflow-hidden">
+      <section className="relative min-h-[90vh] bg-slate-950 flex items-center pt-28 pb-32 overflow-hidden">
         {/* Editorial Background Image */}
         <div className="absolute inset-0 -z-10">
           <img 

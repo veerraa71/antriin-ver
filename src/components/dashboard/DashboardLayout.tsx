@@ -1,13 +1,32 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { Sidebar } from "./Sidebar";
 import { Bell, Search, User } from "lucide-react";
 import { Chatbot } from "../Chatbot";
+import { useState, useEffect } from "react";
 
 interface DashboardLayoutProps {
   role: "admin" | "customer";
 }
 
 export function DashboardLayout({ role }: DashboardLayoutProps) {
+  const navigate = useNavigate();
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    try {
+      const userStr = localStorage.getItem("antriin_current_user");
+      if (userStr) {
+        const userObj = JSON.parse(userStr);
+        setUserName(userObj.name);
+      } else {
+        // Fallback default jika tidak ada session untuk mencegah blank screen
+        setUserName(role === "admin" ? "Admin ANTRIIN" : "Budi Santoso");
+      }
+    } catch (e) {
+      setUserName(role === "admin" ? "Admin ANTRIIN" : "Budi Santoso");
+    }
+  }, [role]);
+
   return (
     <div className="flex bg-slate-50 min-h-screen">
       <Sidebar role={role} />
@@ -34,7 +53,7 @@ export function DashboardLayout({ role }: DashboardLayoutProps) {
                 <User className="w-5 h-5 text-slate-500 group-hover:text-brand-600 transition-colors" />
               </div>
               <div className="text-left hidden sm:block">
-                <p className="text-sm font-bold text-slate-900 leading-tight uppercase tracking-tight">Admin ANTRIIN</p>
+                <p className="text-sm font-bold text-slate-900 leading-tight uppercase tracking-tight">{userName}</p>
                 <p className="text-[10px] font-bold text-slate-400 leading-tight uppercase tracking-widest">{role === "admin" ? "Pemilik Bisnis" : "Pelanggan"}</p>
               </div>
             </div>

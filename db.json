@@ -1,0 +1,42 @@
+[
+  {
+    "id": "A-01",
+    "name": "Rizky Fauzi",
+    "email": "rizky@gmail.com",
+    "serviceType": "Layanan Kasir",
+    "status": "Selesai",
+    "joinedAt": "13:45"
+  },
+  {
+    "id": "B-01",
+    "name": "Siti Aminah",
+    "email": "siti@gmail.com",
+    "serviceType": "Layanan Pelanggan",
+    "status": "Dilayani",
+    "joinedAt": "14:10"
+  },
+  {
+    "id": "C-01",
+    "name": "Budi Santoso",
+    "email": "budi@email.com",
+    "serviceType": "Layanan Konsultasi",
+    "status": "Menunggu",
+    "joinedAt": "14:12"
+  },
+  {
+    "id": "A-02",
+    "name": "Dewi Lestari",
+    "email": "dewi@gmail.com",
+    "serviceType": "Layanan Kasir",
+    "status": "Menunggu",
+    "joinedAt": "14:15"
+  },
+  {
+    "id": "B-02",
+    "name": "Ahmad Subarjo",
+    "email": "ahmad@gmail.com",
+    "serviceType": "Layanan Pelanggan",
+    "status": "Menunggu",
+    "joinedAt": "14:22"
+  }
+]

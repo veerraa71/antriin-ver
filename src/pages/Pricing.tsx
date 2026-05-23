@@ -3,29 +3,37 @@ import { Check, Zap, Briefcase, Target, ShieldCheck } from "lucide-react";
 
 const plans = [
   {
-    name: "Dasar",
+    name: "UMKM Pemula",
     price: "0",
-    description: "Ideal untuk usaha kecil dan perorangan.",
-    features: ["Maks 20 Antrian/Hari", "Dashboard Standar", "Notifikasi Dasar", "Dukungan Email"],
-    icon: <Target className="w-6 h-6" />,
-    color: "bg-slate-100 text-slate-900 border-slate-200"
+    description: "Sangat cocok untuk warung atau toko kecil yang baru memulai digitalisasi antrean.",
+    features: ["Hingga 30 Antrean / Hari", "1 Panel Dashboard Operator", "Notifikasi Suara Dasar", "Dukungan Komunitas"],
+    icon: <Target className="w-6 h-6 text-emerald-600" />,
+    color: "bg-white text-slate-900 border-slate-200/80 shadow-lg shadow-slate-100/50",
+    iconBg: "bg-emerald-50",
+    checkColor: "bg-emerald-100 text-emerald-700",
+    popular: false
   },
   {
-    name: "Pro",
-    price: "49k",
-    description: "Terbaik untuk UMKM yang sedang berkembang.",
-    features: ["Antrian Tak Terbatas", "Analitik Pro", "Notifikasi WhatsApp Otomatis", "Integrasi Asisten AI", "Dukungan Prioritas"],
-    icon: <Zap className="w-6 h-6" />,
-    color: "bg-brand-600 text-white border-brand-500 shadow-xl shadow-brand-500/20",
+    name: "UMKM Berkembang",
+    price: "149.000",
+    description: "Pilihan terbaik untuk usaha kuliner, klinik, dan toko ritel harian.",
+    features: ["Antrean Tak Terbatas", "Multi-Layanan & Multi-Loket", "Notifikasi WhatsApp Otomatis", "Panggilan Suara TTS AI", "Laporan Statistik Harian"],
+    icon: <Zap className="w-6 h-6 text-brand-400" />,
+    color: "bg-slate-900 text-white border-slate-800 shadow-2xl shadow-slate-900/30",
+    iconBg: "bg-white/10",
+    checkColor: "bg-brand-500/20 text-brand-300",
     popular: true
   },
   {
-    name: "Bisnis",
-    price: "99k",
-    description: "Solusi lengkap untuk operasi multi-cabang.",
-    features: ["Hingga 5 Cabang", "Admin Multi-User", "Analitik AI Lanjutan", "Akses API Penuh", "Dashboard Manajerial"],
-    icon: <Briefcase className="w-6 h-6" />,
-    color: "bg-slate-900 text-white border-slate-800"
+    name: "Kemitraan Bisnis",
+    price: "349.000",
+    description: "Dukungan penuh multi-cabang, prioritas tinggi, dan integrasi API operasional.",
+    features: ["Hingga 5 Lokasi Cabang", "Manajemen Staf & Akses Multi-User", "Data Analitik Tren Bulanan", "Akses API & Integrasi Aplikasi", "Dukungan Prioritas 24/7"],
+    icon: <Briefcase className="w-6 h-6 text-blue-600" />,
+    color: "bg-white text-slate-900 border-slate-200/80 shadow-lg shadow-slate-100/50",
+    iconBg: "bg-blue-50",
+    checkColor: "bg-blue-100 text-blue-700",
+    popular: false
   }
 ];
 
@@ -33,58 +41,61 @@ export function Pricing() {
   return (
     <div className="py-24 bg-transparent min-h-screen">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16 px-4">
-          <h2 className="font-display text-5xl md:text-6xl font-bold text-slate-900 mb-6 tracking-tight">Harga Sederhana & Transparan</h2>
-          <p className="text-slate-500 max-w-2xl mx-auto text-lg font-medium">
-            Investasikan masa depan layanan pelanggan Anda dengan paket yang dirancang untuk tumbuh bersama bisnis Anda.
+        <div className="text-center mb-16 px-4 space-y-4">
+          <span className="text-[10px] bg-brand-600/10 border border-brand-600/15 text-brand-600 font-bold uppercase tracking-[0.25em] px-4 py-1.5 rounded-full inline-block">
+            Investasi Layanan Berkualitas
+          </span>
+          <h2 className="font-display text-4xl md:text-6xl font-black text-slate-900 tracking-tight uppercase">Harga Sederhana & <span className="text-brand-600">Transparan</span></h2>
+          <p className="text-slate-500 max-w-2xl mx-auto text-sm md:text-base font-semibold leading-relaxed">
+            Investasikan kenyamanan pelanggan Anda dengan paket layanan yang fleksibel, tanpa biaya tersembunyi, dan mudah diatur sesuai skala bisnis Anda.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-6xl mx-auto">
           {plans.map((p, i) => (
             <motion.div
               key={i}
-              whileHover={{ y: -10 }}
-              className={`p-10 rounded-[3rem] border flex flex-col relative h-full transition-all ${p.color}`}
+              whileHover={{ y: -8 }}
+              className={`p-8 md:p-10 rounded-[3.5rem] border flex flex-col relative transition-all duration-300 ${p.color}`}
             >
               {p.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-yellow-400 text-yellow-950 text-[10px] font-bold px-5 py-2 rounded-full uppercase tracking-widest shadow-xl">
-                  Paling Populer
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-500 text-slate-950 text-[9px] font-black px-6 py-2 rounded-full uppercase tracking-widest shadow-xl shadow-brand-500/20">
+                  Pilihan Terpopuler
                 </div>
               )}
               
               <div className="mb-8">
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 bg-white/10 backdrop-blur-sm shadow-inner`}>
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 ${p.iconBg} shadow-inner`}>
                   {p.icon}
                 </div>
-                <h3 className="text-2xl font-display font-bold mb-2 uppercase tracking-wide">{p.name}</h3>
-                <div className="flex items-baseline gap-1 mb-6">
-                  <span className="text-sm font-bold opacity-70 italic">Rp</span>
-                  <span className="text-5xl font-bold tracking-tighter">{p.price}</span>
-                  <span className="text-sm font-bold opacity-70 uppercase tracking-widest ml-2">/bln</span>
+                <h3 className="text-xl font-display font-black mb-3 uppercase tracking-wider">{p.name}</h3>
+                <div className="flex items-baseline gap-1.5 mb-6">
+                  <span className="text-xs font-bold opacity-70 italic">Rp</span>
+                  <span className="text-4xl md:text-5xl font-black tracking-tighter">{p.price}</span>
+                  <span className="text-xs font-bold opacity-70 uppercase tracking-widest ml-2">/bln</span>
                 </div>
-                <p className="text-sm opacity-80 leading-relaxed font-medium">{p.description}</p>
+                <p className="text-slate-400 text-xs leading-relaxed font-semibold min-h-[40px]">{p.description}</p>
               </div>
 
               <div className="space-y-4 mb-12 flex-grow">
                 {p.features.map((f, fi) => (
-                  <div key={fi} className="flex items-start gap-4">
-                    <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
-                      <Check className="w-3 h-3" />
+                  <div key={fi} className="flex items-start gap-3">
+                    <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${p.checkColor} shadow-sm`}>
+                      <Check className="w-3 h-3 stroke-[3]" />
                     </div>
-                    <span className="text-sm font-bold uppercase tracking-wide opacity-90">{f}</span>
+                    <span className="text-xs font-bold uppercase tracking-wider opacity-90">{f}</span>
                   </div>
                 ))}
               </div>
 
-              <button className={`w-full py-5 rounded-3xl font-bold text-xs uppercase tracking-[0.2em] transition-all shadow-lg ${
+              <button className={`w-full py-4.5 rounded-2xl font-bold text-[10px] uppercase tracking-[0.2em] transition-all shadow-md cursor-pointer ${
                 p.popular 
-                  ? "bg-white text-brand-600 hover:bg-brand-50" 
-                  : p.name === "Bisnis" 
-                    ? "bg-brand-600 text-white hover:bg-brand-700"
-                    : "bg-white text-slate-900 border border-slate-200 hover:bg-slate-50"
+                  ? "bg-brand-500 hover:bg-brand-600 text-slate-950 shadow-lg shadow-brand-500/10" 
+                  : p.checkColor.includes("blue") 
+                    ? "bg-slate-900 text-white hover:bg-slate-800"
+                    : "bg-slate-100 text-slate-900 hover:bg-slate-200 border border-slate-200/50"
               }`}>
-                Pilih Paket {p.name}
+                Mulai {p.name}
               </button>
             </motion.div>
           ))}

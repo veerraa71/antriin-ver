@@ -5,22 +5,23 @@ import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { Pricing } from "./pages/Pricing";
+import { FAQ } from "./pages/FAQ";
+import { Contact } from "./pages/Contact";
+import { Terms } from "./pages/Terms";
+import { ScrollToTop } from "./pages/ScrollToTop";
 import { AdminDashboard } from "./pages/dashboard/Admin";
-import { About } from "./pages/About";
-import { Gallery } from "./pages/Gallery";
-
-// Placeholder Components for missing pages
-const CustomerDashboard = () => <div className="py-20 text-center flex flex-col items-center justify-center min-h-[60vh]"><h1 className="text-4xl font-bold mb-4 font-display uppercase tracking-tight">Customer Dashboard</h1><p className="text-slate-500 font-medium font-mono italic">Welcome to ANTRIIN. Your queue features will appear here shortly.</p></div>;
+import { CustomerDashboard } from "./pages/dashboard/Customer";
 
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="gallery" element={<Gallery />} />
-          <Route path="faq" element={<div className="py-40 text-center min-h-screen flex items-center justify-center"><h1 className="text-5xl font-display font-bold uppercase tracking-tighter">Help Center & FAQ</h1></div>} />
+          <Route path="faq" element={<FAQ />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="terms" element={<Terms />} />
           <Route path="pricing" element={<Pricing />} />
         </Route>
         

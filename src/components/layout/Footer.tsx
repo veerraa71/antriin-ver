@@ -33,10 +33,9 @@ export function Footer() {
         <div>
           <h4 className="font-display font-bold text-slate-900 mb-8 uppercase tracking-widest text-[10px]">Produk</h4>
           <ul className="space-y-4 text-xs font-bold uppercase tracking-wider">
-            <li><Link to="/gallery" className="text-slate-400 hover:text-brand-600 transition-colors">Galeri</Link></li>
-            <li><Link to="/pricing" className="text-slate-400 hover:text-brand-600 transition-colors">Harga</Link></li>
-            <li><Link to="/demo" className="text-slate-400 hover:text-brand-600 transition-colors">Demo Langsung</Link></li>
-            <li><Link to="/about" className="text-slate-400 hover:text-brand-600 transition-colors">Tentang Kami</Link></li>
+            <li><Link to="/pricing" className="text-slate-400 hover:text-brand-600 transition-colors">Daftar Harga</Link></li>
+            <li><Link to="/login" className="text-slate-400 hover:text-brand-600 transition-colors">Demo Langsung</Link></li>
+            <li><Link to="/register" className="text-slate-400 hover:text-brand-600 transition-colors">Daftar Toko Gratis</Link></li>
           </ul>
         </div>
 

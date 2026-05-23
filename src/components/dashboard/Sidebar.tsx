@@ -72,13 +72,18 @@ export function Sidebar({ role }: SidebarProps) {
 
       <div className="pt-8 border-t border-slate-100 space-y-1">
         <Link
-          to="/dashboard/settings"
+          to="#"
+          onClick={(e) => e.preventDefault()}
           className="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-semibold text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition-all group"
         >
           <Settings className="w-5 h-5 text-slate-400 group-hover:text-slate-900" />
           Pengaturan Akun
         </Link>
         <button
+          onClick={() => {
+            localStorage.removeItem("antriin_current_user");
+            window.location.href = "/login";
+          }}
           className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-semibold text-red-500 hover:bg-red-50 transition-all group"
         >
           <LogOut className="w-5 h-5" />
